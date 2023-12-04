@@ -1,7 +1,7 @@
 div {
     &.body {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
     }
@@ -24,7 +24,16 @@ div {
     &.soil-moisture,
     &.water-level,
     &.last-activations {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         height: 300px;
+
+        span {
+            font-size: larger
+        }
     }
 }
 
@@ -50,11 +59,12 @@ div {
         &.water-level,
         &.last-activations {
             width: 100%;
+
         }
 
         &.body {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
