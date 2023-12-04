@@ -1,0 +1,66 @@
+div {
+    &.body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.header {
+        // Styles for the header
+        height: 200px;
+        width: 400px;
+    }
+
+    &.demo-chart {
+        height: 400px;
+        width: 400px;
+    }
+
+    &.title {
+        height: 50px;
+    }
+
+    &.soil-moisture,
+    &.water-level,
+    &.last-activations {
+        height: 300px;
+    }
+}
+
+// Media query for larger screens
+@media screen and (min-width: 768px) {
+    div {
+        display: flex;
+        flex-direction: column;
+
+        &.title {
+            // Additional styles for the title in the column layout
+        }
+    }
+}
+
+// Media query for mobile screens
+@media screen and (max-width: 767px) {
+    div {
+        display: flex;
+        flex-direction: row;
+
+        &.soil-moisture,
+        &.water-level,
+        &.last-activations {
+            width: 100%;
+        }
+
+        &.body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &.title {
+            // Additional styles for the title in the row layout
+        }
+    }
+}
