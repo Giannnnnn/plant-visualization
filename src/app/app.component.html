@@ -7,43 +7,45 @@
 </mat-toolbar>
 
 <div class="body">
-  <div class="soil-moisture">
-    <div echarts
-         [options]="soilMoistureChartOption"
-         class="demo-chart"></div>
-    <span>Soil Moisture Level (%)</span>
-  </div>
-
-  <div class="water-level">
-    <div echarts
-         [options]="waterLevelChartOption"
-         class="demo-chart"></div>
-    <span>Water Level (ml)</span>
-  </div>
-
-  <div class="distance-chart">
-    <div echarts
-         [options]="distanceChartOption"
-         class="demo-chart"></div>
-    Water Level Over Time (cm)
-  </div>
-
   <div class="last-activations">
+    <span class="title-span">Últimas ativações da bomba</span>
     <table mat-table
+           class="table-data"
            [dataSource]="activationsData">
-      <!-- Date Column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell
             *matHeaderCellDef>Date</th>
         <td mat-cell
             *matCellDef="let activation">{{ formatDateTime(activation.date) }}</td>
       </ng-container>
-
       <tr mat-header-row
           *matHeaderRowDef="['date']"></tr>
       <tr mat-row
           *matRowDef="let row; columns: ['date'];"></tr>
     </table>
-    <span >Water Pump Activations</span>
+  </div>
+
+
+  <div class="water-level-chart">
+    <div class="component-body">
+      <div class="component-cylinder">
+        <div class="water-level"
+             [ngStyle]="{ 'height': calculateHeight() }"></div>
+      </div>
+      <div class="component-text">
+        <span class="title-span">{{ actualWaterLevelCentimeters }} cm</span>
+      </div>
+    </div>
+    <span class="title-span"> Água restante: 60 mls</span>
+    <div *ngIf="actualWaterLevelCentimeters < 6">
+      <span>Atenção! Adicione água ao recipiente de armazenamento!</span></div>
+  </div>
+
+  <div class="soil-moisture">
+    <div echarts
+         [options]="soilMoistureChartOption"
+         class="demo-chart"></div>
+         <span >Umidade do solo (%)</span>
+         <span class="title-span">Status: OK</span>
   </div>
 </div>

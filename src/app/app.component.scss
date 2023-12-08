@@ -1,3 +1,6 @@
+mat-toolbar{
+    position: absolute;
+}
 div {
     &.body {
         display: flex;
@@ -22,7 +25,8 @@ div {
     }
 
     &.soil-moisture,
-    &.water-level,
+    &.water-level-velocimeter,
+    &.water-level-chart,
     &.last-activations {
         display: flex;
         flex-direction: column;
@@ -30,6 +34,8 @@ div {
         justify-content: center;
         text-align: center;
         height: 300px;
+        padding-left: 50px;
+        padding-right: 50px;
 
         span {
             font-size: larger
@@ -37,8 +43,127 @@ div {
     }
 }
 
+button {
+    margin-top: 20px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* This will make the container take the full height of the viewport */
+}
+
+.soil-moisture,
+.water-level-chart,
+.last-activations {
+    margin-top: 20px;
+    /* Adjust as needed for spacing between the sections */
+}
+
+
+
+.component-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.title-span {
+    display: block;
+    margin-top: 10px;
+    /* Adjust as needed for spacing between the title and the content */
+}
+
+.demo-chart,
+.table-data {
+    margin-top: 10px;
+    /* Adjust as needed for spacing between the charts and the table */
+}
+
+.title-span {
+    font-size: xx-large;
+}
+
+.table-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    overflow: overlay;
+    max-height: 219px;
+
+}
+
+/* water-level.component.css */
+.water-level-chart {
+    text-align: center;
+}
+
+.component-body {
+    position: relative;
+    display: inline-block;
+}
+
+.component-cylinder {
+    position: relative;
+    width: 90px;
+    height: 150px;
+    /* Adjust as needed */
+    background-color: #1E90FF;
+    /* Set a background color that resembles water */
+    border-radius: 15px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    /* Add a subtle shadow */
+}
+
+.water-level {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    /* Adjust to give a margin to the water level */
+    right: 5%;
+    /* Adjust to give a margin to the water level */
+    height: 50%;
+    /* Initial height, will be adjusted dynamically */
+    background: linear-gradient(to bottom, #87CEFA, #1E90FF);
+    /* Gradient for a water-like effect */
+    border-radius: 0 0 15px 15px;
+    /* Rounded bottom corners */
+    border: 2px solid #3399ff;
+    /* Border color for the water level */
+    animation: wave 1s infinite linear;
+    /* Add a subtle wave animation */
+}
+
+.component-text {
+    margin-top: 10px;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(-1px);
+    }
+
+    50% {
+        transform: translateY(1px);
+    }
+
+    100% {
+        transform: translateY(-1px);
+    }
+}
+
+
 // Media query for larger screens
 @media screen and (min-width: 768px) {
+
+
     div {
         display: flex;
         flex-direction: column;
@@ -51,12 +176,15 @@ div {
 
 // Media query for mobile screens
 @media screen and (max-width: 767px) {
+        .last-activations {
+        padding-top: 150px;
+    }
     div {
         display: flex;
         flex-direction: row;
 
         &.soil-moisture,
-        &.water-level,
+        &.water-level-velocimeter,
         &.last-activations {
             width: 100%;
 

@@ -12,10 +12,12 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit, OnDestroy {
   soilMoistureChartOption: EChartsOption = {};
-  waterLevelChartOption: EChartsOption = {};
   distanceChartOption: EChartsOption = {};
+  waterMissingCentimeters:number= 0;
+  totalWaterCentimeters:number= 18;
+  actualWaterLevelCentimeters =  5;
   activationsData: { date: Date }[] = [];
-
+  percentage: number = 50;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -27,11 +29,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.loadData(); // Initial data load
 
     // Set up a timer to refresh data every minute
-    interval(60000) // 60000 milliseconds = 1 minute
+    interval(30000) // 60000 milliseconds = 1 minute
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.loadData();
       });
+  }
+  calculateHeight(): string {
+    return this.actualWaterLevelCentimeters + '%';
   }
 
   ngOnDestroy(): void {
@@ -45,11 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.plantStatusService.getAverageWaterLevel().subscribe((result) => {
-      this.waterLevelChartOption = this.createGaugeChart(result.average, 'Water Level (ml)');
-    });
-
-    this.plantStatusService.getAverageWaterLevel().subscribe((result) => {
-      this.distanceChartOption = this.createDistanceChart(result);
+      this.waterMissingCentimeters = result.average;
     });
 
     this.plantStatusService.getLastWaterPumpActivations().subscribe((result) => {
@@ -81,12 +82,10 @@ export class AppComponent implements OnInit, OnDestroy {
             length: 15,
             lineStyle: {
               width: 2,
-              color: '#999',
             },
           },
           axisLabel: {
             distance: 25,
-            color: '#999',
             fontSize: 10,
           },
           anchor: {

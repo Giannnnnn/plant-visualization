@@ -1,10 +1,8 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import {MatButtonModule} from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEchartsDirective, NgxEchartsModule, provideEcharts } from 'ngx-echarts';
 import { CommonModule, DatePipe } from '@angular/common';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -17,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent
   ],
   imports: [
+    MatButtonModule,
     MatTableModule,
     HttpClientModule,
     BrowserModule,
@@ -24,7 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     CommonModule,
     NgxEchartsDirective,
-    AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

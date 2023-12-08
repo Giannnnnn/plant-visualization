@@ -1,4 +1,3 @@
-// plant-status.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PlantStatusService {
-    private baseUrl = 'http://localhost:3000'; // Adjust the URL as needed
+    private baseUrl = 'http://localhost:3000'; 
 
   constructor(private http: HttpClient) {}
 
